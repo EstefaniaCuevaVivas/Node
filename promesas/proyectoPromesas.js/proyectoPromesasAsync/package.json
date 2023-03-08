@@ -1,8 +1,8 @@
 {
-  "name": "node",
+  "name": "proyectopromesasasync",
   "version": "1.0.0",
   "description": "",
-  "main": "mensajes.js",
+  "main": "objetoPromesasAsync.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
