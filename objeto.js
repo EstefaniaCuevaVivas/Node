@@ -10,7 +10,7 @@ const rl = readline.createInterface({
 rl.question("¿Cuál es tu nombre? ", (name) => {
   rl.question("¿Cuál es tu apellido? ", (surname) => {
     rl.question("¿Cuál es tu edad? ", (age) => {
-      let newUser = { name, surname, age};
+      let newUser = { name:name, surname:surname, age:age};
       const jsonString = JSON.stringify(newUser);
       fs.writeFile( "objeto.json", 
         jsonString, (err) => {
@@ -18,7 +18,7 @@ rl.question("¿Cuál es tu nombre? ", (name) => {
           fs.readFile("objeto.json", (err, data) => {
             if (err) throw err;
             let newUser = JSON.parse(data);
-            console.log(`Hola ${name} ${surname}, tienes ${age} años.`)
+            console.log(`Hola ${newUser.name} ${newUser.surname}, tienes ${newUser.age} años.`)
             rl.close();
           });
         }
