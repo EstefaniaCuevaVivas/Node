@@ -10,7 +10,7 @@ function getStart(request,response){
 function getBook(request,response){
   let respuesta;
   if(book !=null)
-    respuesta={error:false,codigo200,data:book}
+    respuesta={error:false,codigo:200,data:book}
   else
     respuesta={error:true,codigo:200,mensaje:"El libro no existe"}  
    
