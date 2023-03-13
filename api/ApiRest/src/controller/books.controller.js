@@ -1,10 +1,10 @@
 const Book =  require("../models/book")
 
 let book=null
-let book1 = new Book('The Great Gatsby', 'F. Scott Fitzgerald', 'tapa blanda',60,"url",34,4);
-let book2 = new Book('To Kill a Mockingbird', 'Harper Lee','tapa blanda',60,"url", 7,4);
-let book3 = new Book('1984', 'George Orwell','tapa blanda',45,"url",5,5);
 
+let book1  = new Book ("El niño con el pijama de rayas","Tapa blanda","John Boyne",39,"https://m.media-amazon.com/images/I/512ndU0-S+L.jpg",60,24);
+let book2  = new Book ("Harry Potter","Tapa dura","J. k. Rowling",45,"https://static.posters.cz/image/1300/posters/harry-potter-la-piedra-filosofal-i104639.jpg",45,68);
+let book3  = new Book ("Codigo Da Vinci","Tapa dura","Dan Brown",20,"https://m.media-amazon.com/images/I/A1IH+BJHY3L.jpg",33,15)
 let books=[book1,book2,book3]
 
 
@@ -13,17 +13,17 @@ function getStart(request,response){
   response.send(respuesta);
 }
 
-function getBook(request,response){
+// function getBook(request,response){
 
-  let respuesta;
+//   let respuesta;
 
-  if(books)
-    respuesta={error:false,codigo:200,data:books}
-  else
-    respuesta={error:true,codigo:200,mensaje:"El libro no existe"}  
+//   if(books)
+//     respuesta={error:false,codigo:200,data:books}
+//   else
+//     respuesta={error:true,codigo:200,mensaje:"El libro no existe"}  
    
-  response.send(respuesta);  
-}
+//   response.send(respuesta);  
+// }
 
 
 function getBookOne(request,response){
@@ -36,11 +36,11 @@ function getBookOne(request,response){
 
    if(bookFound != undefined){
 
-    respuesta={error:false,codigo:200,data:bookFound}
+    respuesta={error:false,codigo:200,mensaje:"El libro encintrado",data:[bookFound]}
 
    } else{
 
-    respuesta= {error:false,codigo:200,data:books}     
+    respuesta= {error:false,codigo:200,mensaje:"mostrado libros",data:books}     
    }
   
   else{
@@ -103,21 +103,27 @@ function putBook(request, response)
 
 function deleteBook(request, response)
 {
-  let deleteBook= books.findIndex(book => book.id_book == request.body.id_book)
+let id = request.body.id_book
+console.log(id);
+
+  let deleteBook= books.findIndex(book => book.id_book == id)
     let respuesta
-    if (deleteBook != null)
+    console.log(deleteBook);
+
+    if (deleteBook != -1)
     {    
-        books.splice(deleteBook,1)  
+        books.splice(deleteBook,1) 
+        console.log(books); 
         respuesta   = {error: false, codigo: 200, 
-                        mensaje: 'Libro borrado',data: book[deleteBook]};
+                        mensaje: 'Libro borrado',data: books};
     }  
     else
         respuesta   = {error: true, codigo: 200, 
-                        mensaje: 'El Libro no existe',data: book[deleteBook]};
+                        mensaje: 'El Libro no existe',data: books};
 
                     
 
     response.send(respuesta);
 };
 
-module.exports = {getStart, getBook,getBookOne, postBook, putBook, deleteBook};
+module.exports = {getStart,getBookOne, postBook, putBook, deleteBook};
